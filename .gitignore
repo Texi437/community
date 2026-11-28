@@ -1,13 +1,28 @@
+# 本机环境与构建产物
+.idea/
+.run/
+.vscode/settings.json
+.gradle/
 .tools/
 .runtime/
-.m2/
 .local/
-backend/target/
-.idea/*
-!.idea/scopes/
-.idea/scopes/*
-!.idea/scopes/Backend_Development.xml
+.m2/
+**/build/
+**/target/
+local.properties
+node_modules/
+tmp/
 *.iml
+*.log
+*.pid
+*.hprof
+*.apk
+*.zip
+
+# 凭证和签名
 .env
-http-client.private.env.json
-Thumbs.db
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12

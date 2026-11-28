@@ -1,0 +1,11 @@
+<resources>
+    <color name="brand">#215c49</color>
+    <color name="brand_soft">#e5efe6</color>
+    <color name="ink">#20382f</color>
+    <color name="muted">#68776f</color>
+    <color name="surface">#ffffff</color>
+    <color name="bg">#f5f6f0</color>
+    <color name="line">#dde4dc</color>
+    <color name="warm">#f8efda</color>
+    <color name="danger">#b54335</color>
+</resources>

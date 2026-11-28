@@ -1,0 +1,6 @@
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp">
+    <com.google.android.material.textfield.TextInputEditText android:id="@+id/input" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:minHeight="56dp" android:textSize="16sp" android:inputType="textCapSentences"
+        android:importantForAutofill="no" android:saveEnabled="false" />
+</com.google.android.material.textfield.TextInputLayout>

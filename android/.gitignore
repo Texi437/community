@@ -1,0 +1,29 @@
+.gradle/
+.idea/
+local.properties
+**/build/
+*.iml
+tmp/
+
+# 本机过程文件与旧交付包
+/.database-implementation/
+/.database-chinese-migration/
+/dist/
+/docs/verification/
+/docs/superpowers/
+/docs/source/
+/docs/design/
+/ui初步设计图/
+/邻里共治_项目初步设计文档.*
+*.log
+/log.txt
+*.pid
+*.hprof
+
+# 凭证与签名文件
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12

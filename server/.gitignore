@@ -1,0 +1,30 @@
+.tools/
+.runtime/
+.m2/
+.local/
+backend/target/
+.idea/*
+!.idea/scopes/
+.idea/scopes/*
+!.idea/scopes/Backend_Development.xml
+*.iml
+.env
+http-client.private.env.json
+Thumbs.db
+
+# 本机生成的 IDE 配置与历史交付记录
+/.run/
+/.vscode/settings.json
+/deliverables/
+/docs/verification/
+/docs/archive/
+*.log
+*.pid
+*.hprof
+
+# 凭证与签名文件
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12

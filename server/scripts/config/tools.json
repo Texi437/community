@@ -1,0 +1,23 @@
+[
+  {
+    "name": "jdk",
+    "version": "17.0.21+9",
+    "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_x64_windows_hotspot_17.0.21_9.zip",
+    "sha256": "98518ecf554465057ee5509462631deeee374bc368c12a411d225cd29381f84b",
+    "executable": "jdk-17.0.21+9\\bin\\java.exe"
+  },
+  {
+    "name": "maven",
+    "version": "3.9.16",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/apache-maven-3.9.16-bin.zip",
+    "sha256": "5af3b743dd8b876b5c45da33b676251e5f1687712644abb4ee519ca56e1d89ce",
+    "executable": "apache-maven-3.9.16\\bin\\mvn.cmd"
+  },
+  {
+    "name": "mysql",
+    "version": "8.4.13",
+    "url": "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.13-winx64.zip",
+    "sha256": "e9cd98b1d23f122987b1afca26ad942efec5891481103d48ae3cde237fa3ea54",
+    "executable": "mysql-8.4.13-winx64\\bin\\mysqld.exe"
+  }
+]

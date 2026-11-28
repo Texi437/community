@@ -1,0 +1,197 @@
+{
+  "sys_user": {
+    "name": "用户账号",
+    "columns": {
+      "id": "用户编号",
+      "username": "用户名",
+      "password_hash": "密码摘要",
+      "nickname": "昵称",
+      "role": "角色",
+      "status": "状态",
+      "created_at": "创建时间"
+    }
+  },
+  "resident_profile": {
+    "name": "居民资料",
+    "columns": {
+      "user_id": "用户编号",
+      "building": "楼栋",
+      "unit": "单元",
+      "room": "门牌"
+    }
+  },
+  "auth_session": {
+    "name": "登录会话",
+    "columns": {
+      "token_hash": "凭证摘要",
+      "user_id": "用户编号",
+      "expires_at_epoch": "到期秒数",
+      "created_at": "创建时间"
+    }
+  },
+  "work_order": {
+    "name": "诉求工单",
+    "columns": {
+      "id": "工单编号",
+      "reporter_id": "上报人",
+      "client_request_id": "请求编号",
+      "assignee_id": "处理人",
+      "title": "标题",
+      "category": "分类",
+      "location": "位置",
+      "description": "描述",
+      "status": "状态",
+      "version": "版本",
+      "result": "结果",
+      "created_at": "创建时间",
+      "updated_at": "更新时间"
+    }
+  },
+  "work_order_log": {
+    "name": "工单日志",
+    "columns": {
+      "id": "日志编号",
+      "work_order_id": "工单编号",
+      "actor_id": "操作人",
+      "actor_role": "操作角色",
+      "action": "操作",
+      "from_status": "原状态",
+      "to_status": "新状态",
+      "note": "备注",
+      "created_at": "创建时间"
+    }
+  },
+  "file_asset": {
+    "name": "文件附件",
+    "columns": {
+      "id": "附件编号",
+      "work_order_id": "工单编号",
+      "storage_key": "存储键",
+      "content_type": "文件类型",
+      "byte_size": "字节数",
+      "created_at": "创建时间"
+    }
+  },
+  "sys_user_permission": {
+    "name": "资料授权",
+    "columns": {
+      "用户编号": "用户编号",
+      "权限代码": "权限代码",
+      "granted_by": "授权人",
+      "granted_at": "授权时间",
+      "expires_at": "到期时间"
+    }
+  },
+  "work_order_log_asset": {
+    "name": "办结附件",
+    "columns": {
+      "附件编号": "附件编号",
+      "log_id": "日志编号"
+    }
+  },
+  "interest_topic": {
+    "name": "兴趣主题",
+    "columns": {
+      "主题代码": "主题代码",
+      "name": "名称",
+      "sort_order": "排序",
+      "is_active": "启用"
+    }
+  },
+  "user_interest": {
+    "name": "用户兴趣",
+    "columns": {
+      "用户编号": "用户编号",
+      "主题代码": "主题代码",
+      "strength": "强度",
+      "updated_at": "更新时间"
+    }
+  },
+  "user_participation": {
+    "name": "参与意愿",
+    "columns": {
+      "用户编号": "用户编号",
+      "intent": "意愿",
+      "valid_until": "有效期",
+      "version": "版本",
+      "updated_at": "更新时间"
+    }
+  },
+  "user_available_slot": {
+    "name": "空闲时段",
+    "columns": {
+      "时段编号": "时段编号",
+      "user_id": "用户编号",
+      "starts_at": "开始时间",
+      "ends_at": "结束时间"
+    }
+  },
+  "venue": {
+    "name": "场地",
+    "columns": {
+      "场地编号": "场地编号",
+      "name": "名称",
+      "capacity": "容量",
+      "opens_at": "开放时间",
+      "closes_at": "关闭时间",
+      "allows_speaker": "允许音响",
+      "rule_text": "规则",
+      "status": "状态",
+      "created_at": "创建时间",
+      "updated_at": "更新时间"
+    }
+  },
+  "community_activity": {
+    "name": "社区活动",
+    "columns": {
+      "活动编号": "活动编号",
+      "organizer_id": "发起人",
+      "client_request_id": "请求编号",
+      "topic_code": "主题代码",
+      "title": "标题",
+      "description": "描述",
+      "venue_id": "场地编号",
+      "starts_at": "开始时间",
+      "ends_at": "结束时间",
+      "capacity": "容量",
+      "uses_speaker": "使用音响",
+      "status": "状态",
+      "version": "版本",
+      "review_method": "审核方式",
+      "review_reasons": "审核原因",
+      "reviewed_by": "审核人",
+      "reviewed_at": "审核时间",
+      "created_at": "创建时间",
+      "updated_at": "更新时间"
+    }
+  },
+  "activity_enrollment": {
+    "name": "活动报名",
+    "columns": {
+      "活动编号": "活动编号",
+      "用户编号": "用户编号",
+      "status": "状态",
+      "created_at": "创建时间",
+      "updated_at": "更新时间"
+    }
+  },
+  "activity_opportunity": {
+    "name": "活动机会",
+    "columns": {
+      "机会编号": "机会编号",
+      "topic_code": "主题代码",
+      "venue_id": "场地编号",
+      "starts_at": "开始时间",
+      "ends_at": "结束时间",
+      "title": "标题",
+      "reason": "推荐依据",
+      "potential_count": "兴趣人数",
+      "willing_count": "意愿人数",
+      "available_count": "可用人数",
+      "source_type": "来源类型",
+      "source_version": "规则版本",
+      "generated_at": "生成时间",
+      "expires_at": "到期时间"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+-- Approved additive migration. Run through the versioned migration tool.
+
+CREATE TABLE venue (
+    `场地编号` BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    capacity INT NOT NULL,
+    opens_at TIME NOT NULL,
+    closes_at TIME NOT NULL,
+    allows_speaker BOOLEAN NOT NULL DEFAULT FALSE,
+    rule_text VARCHAR(1000) NOT NULL,
+    status VARCHAR(16) CHARACTER SET ascii COLLATE ascii_bin NOT NULL DEFAULT 'ACTIVE',
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (`场地编号`),
+    KEY `场地状态` (status,`场地编号`),
+    CONSTRAINT `场地人数范围` CHECK(capacity>0),
+    CONSTRAINT `场地开放顺序` CHECK(opens_at<closes_at),
+    CONSTRAINT `场地音响范围` CHECK(allows_speaker IN(0,1)),
+    CONSTRAINT `场地状态范围` CHECK(status IN('ACTIVE','INACTIVE'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE community_activity (
+    `活动编号` CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    organizer_id BIGINT NOT NULL,
+    client_request_id CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    topic_code VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(2000) NOT NULL,
+    venue_id BIGINT NOT NULL,
+    starts_at TIMESTAMP(6) NOT NULL,
+    ends_at TIMESTAMP(6) NOT NULL,
+    capacity INT NOT NULL,
+    uses_speaker BOOLEAN NOT NULL DEFAULT FALSE,
+    status VARCHAR(20) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    version INT NOT NULL DEFAULT 0,
+    review_method VARCHAR(16) CHARACTER SET ascii COLLATE ascii_bin NULL,
+    review_reasons JSON NOT NULL,
+    reviewed_by BIGINT NULL,
+    reviewed_at TIMESTAMP(6) NULL,
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (`活动编号`),
+    UNIQUE KEY `提交去重` (organizer_id,client_request_id),
+    KEY `活动状态` (status,starts_at,`活动编号`),
+    KEY `我的发起` (organizer_id,created_at,`活动编号`),
+    KEY `场地占用` (venue_id,status,starts_at,ends_at),
+    KEY `活动主题` (topic_code),
+    KEY `活动审核人` (reviewed_by),
+    CONSTRAINT `活动发起人关联` FOREIGN KEY (organizer_id) REFERENCES sys_user(id),
+    CONSTRAINT `活动主题关联` FOREIGN KEY(topic_code) REFERENCES interest_topic(`主题代码`),
+    CONSTRAINT `活动场地关联` FOREIGN KEY(venue_id) REFERENCES venue(`场地编号`),
+    CONSTRAINT `活动审核人关联` FOREIGN KEY(reviewed_by) REFERENCES sys_user(id),
+    CONSTRAINT `活动时间顺序` CHECK(ends_at>starts_at),
+    CONSTRAINT `活动容量范围` CHECK(capacity>0),
+    CONSTRAINT `活动版本范围` CHECK(version>=0),
+    CONSTRAINT `活动音响范围` CHECK(uses_speaker IN(0,1)),
+    CONSTRAINT `活动状态范围` CHECK(status IN('PENDING_REVIEW','REJECTED','PUBLISHED','ENDED','CANCELLED')),
+    CONSTRAINT `活动审核方式` CHECK(review_method IS NULL OR review_method IN('AUTO','MANUAL')),
+    CONSTRAINT `活动例外数组` CHECK(JSON_TYPE(review_reasons)='ARRAY')
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE activity_enrollment (
+    `活动编号` CHAR(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    `用户编号` BIGINT NOT NULL,
+    status VARCHAR(16) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (`活动编号`,`用户编号`),
+    KEY `活动报名` (`活动编号`,status,`用户编号`),
+    KEY `我的报名` (`用户编号`,status,`活动编号`),
+    CONSTRAINT `报名活动关联` FOREIGN KEY(`活动编号`) REFERENCES community_activity(`活动编号`),
+    CONSTRAINT `报名用户关联` FOREIGN KEY(`用户编号`) REFERENCES sys_user(id),
+    CONSTRAINT `报名状态范围` CHECK(status IN('CONFIRMED','WITHDRAWN','CANCELLED'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
